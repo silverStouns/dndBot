@@ -40,15 +40,13 @@ var CreateCharHandler = func(update tgbotapi.Update) []tgbotapi.Chattable {
 	switch req.Step {
 	case GetCharPrimer:
 		tmpl := getTemplate()
-		//t, err := json.Marshal(tmpl)
-		//if err != nil {
-		//	logger.Error("err:%v", err)
-		//}
+		dd := "Форма заполнения персонажа выше, заполните её и отправите мне следующим сообщением!"
 		msgTg := tgbotapi.NewMessage(req.GetChatID(), tmpl)
-		msgTg.ParseMode = "MarkdownV2"
+		msgTg2 := tgbotapi.NewMessage(req.GetChatID(), dd)
+		//msgTg.ParseMode = "MarkdownV2"
 		msgTg.ReplyMarkup = tgbotapi.ReplyKeyboardRemove{RemoveKeyboard: true, Selective: true}
 		req.Step = SetCharInfo
-		return []tgbotapi.Chattable{msgTg}
+		return []tgbotapi.Chattable{msgTg, msgTg2}
 	case SetCharInfo:
 		ch := database.Char{}
 		txt := "Произошла ошибка, обратитесь к разработчику"
