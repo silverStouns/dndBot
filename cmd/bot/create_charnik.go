@@ -81,11 +81,18 @@ var CreateCharHandler = func(update tgbotapi.Update) []tgbotapi.Chattable {
 func getTemplate() string {
 	byteeee, _ := json.MarshalIndent(map[string]interface{}{
 		"name_char": "Имя персонажа",
+		"characteristic": []map[string]interface{}{
+			{"name": "Сила", "col": 10},
+			{"name": "Ловкость", "col": 10},
+			{"name": "Телосложение", "col": 10},
+			{"name": "Мудрость", "col": 10},
+			{"name": "Интеллект", "col": 10},
+			{"name": "Харизма", "col": 10},
+		},
 	}, "\t", "")
 	return string(byteeee)
 	//	return `{"name_char":"Имя персонажа",
 	//"race":"Раса",
-	//"characteristic":[{"name":"Сила","col":10},{"name":"Ловкость","col":10},{"name":"Телосложение","col":10},{"name":"Мудрость","col":10},{"name":"Интеллект","col":10},{"name":"Харизма","col":10}],
 	//"experience":900,
 	//"class":"Класс персонажа/подкласс(если есть)",
 	//"weapon":[{"upgrade":1,"description":"Описание оружия","type":"Тип оружия","damage":"Урон оружия например 1d10","unic_bonuses":"Уникальный бонус оружия, например возможность кровотечения(желательно указать сложность)"},
