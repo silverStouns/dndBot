@@ -257,46 +257,46 @@ func ResultBonusMaster(lvl int) int {
 }
 
 type WeaponT struct {
-	Upgrade     int    `json:"upgrade"`
-	Description string `json:"description"`
-	Type        string `json:"type"` // Например двуручный топор
-	Damage      string `json:"damage"`
-	UnicBonuses string `json:"unic_bonuses"` //уникальные бонусы например +5 у крону по ограм
+	Upgrade     int    `json:"upgrade,omitempty"`
+	Description string `json:"description,omitempty"`
+	Type        string `json:"type,omitempty"` // Например двуручный топор
+	Damage      string `json:"damage,omitempty"`
+	UnicBonuses string `json:"unic_bonuses,omitempty"` //уникальные бонусы например +5 у крону по ограм
 }
 
 type Spels struct {
-	Name     string `json:"name"`
-	Lvl      int    `json:"lvl"`       // Уровень ячейки от 0 до 9
-	Damage   string `json:"damage"`    // урон заклинания в стиле 1d6
-	TypeSpas string `json:"type_spas"` // Тип спаса Допустим Интелект
-	HardSpas int    `json:"hard_spas"` // сложность спаса(должен высчитывать)
+	Name     string `json:"name,omitempty"`
+	Lvl      int    `json:"lvl,omitempty"`       // Уровень ячейки от 0 до 9
+	Damage   string `json:"damage,omitempty"`    // урон заклинания в стиле 1d6
+	TypeSpas string `json:"type_spas,omitempty"` // Тип спаса Допустим Интелект
+	HardSpas int    `json:"hard_spas,omitempty"` // сложность спаса(должен высчитывать)
 }
 
 type Characteristic struct {
-	Name string `json:"name"`
-	Col  int    `json:"col"`
+	Name string `json:"name,omitempty"`
+	Col  int    `json:"col,omitempty"`
 	Mod  int    `json:"mod,omitempty"`
 }
 
 type Char struct {
-	NameUser          string            `json:"name_user,omitempty"`    // Имя пользователя
-	NameModule        string            `json:"name_module,omitempty"`  // Имя модуля(свободный ввод)
-	NameChar          string            `json:"name_char"`              // Имя персоонажа
-	Race              string            `json:"race"`                   // Расса
-	Characteristic    []Characteristic  `json:"characteristic"`         // Характеристики в формате Название/Значение
-	Experience        int64             `json:"experience"`             // Опыт
-	Lvl               int               `json:"lvl,omitempty"`          // Уровень перса
-	Class             string            `json:"class"`                  // Класс персоонажа
-	Weapon            []WeaponT         `json:"weapon"`                 // Всё ОРУЖИЕ перса которым он пользуется
-	Skills            []string          `json:"skills"`                 // стандартные скилы по типу атлетики и акробатики, заполнять только взятые\
-	BonusMaster       int               `json:"bonus_master,omitempty"` //Бонус мастерства
-	UnicueBonusSkills map[string]string `json:"unicue_bonus_skills"`    //Если у когото уесть дополнительно усиление навыка
-	Gold              int64             `json:"gold"`                   // Будем учитывать только золото
-	Invertar          string            `json:"invertar"`               // Просто вещи писать можно всё что угодно
-	Spels             []Spels           `json:"spels"`                  //Заклинания персоонажа
-	UnicueSpels       map[string]string `json:"unicue_spels"`           // Уникальные способности в стиле Название:Эффект
-	Resurses          string            `json:"resurses"`               //уникальный ресурс персоонажа(если есть) в идеале заполнять Название + кол-во
-	Description       string            `json:"description"`            // Описание персоонажа
-	ImageUrl          string            `json:"image_url"`              // Картинка перса
-	NumModule         int               `json:"num_module"`
+	NameUser          string            `json:"name_user,omitempty"`           // Имя пользователя
+	NameModule        string            `json:"name_module,omitempty"`         // Имя модуля(свободный ввод)
+	NameChar          string            `json:"name_char,omitempty"`           // Имя персоонажа
+	Race              string            `json:"race,omitempty"`                // Расса
+	Characteristic    []Characteristic  `json:"characteristic,omitempty"`      // Характеристики в формате Название/Значение
+	Experience        int64             `json:"experience,omitempty"`          // Опыт
+	Lvl               int               `json:"lvl,omitempty"`                 // Уровень перса
+	Class             string            `json:"class,omitempty"`               // Класс персоонажа
+	Weapon            []WeaponT         `json:"weapon,omitempty"`              // Всё ОРУЖИЕ перса которым он пользуется
+	Skills            []string          `json:"skills,omitempty"`              // стандартные скилы по типу атлетики и акробатики, заполнять только взятые\
+	BonusMaster       int               `json:"bonus_master,omitempty"`        //Бонус мастерства
+	UnicueBonusSkills map[string]string `json:"unicue_bonus_skills,omitempty"` //Если у когото уесть дополнительно усиление навыка
+	Gold              int64             `json:"gold,omitempty"`                // Будем учитывать только золото
+	Invertar          string            `json:"invertar,omitempty"`            // Просто вещи писать можно всё что угодно
+	Spels             []Spels           `json:"spels,omitempty"`               //Заклинания персоонажа
+	UnicueSpels       map[string]string `json:"unicue_spels,omitempty"`        // Уникальные способности в стиле Название:Эффект
+	Resurses          string            `json:"resurses,omitempty"`            //уникальный ресурс персоонажа(если есть) в идеале заполнять Название + кол-во
+	Description       string            `json:"description,omitempty"`         // Описание персоонажа
+	ImageUrl          string            `json:"image_url,omitempty"`           // Картинка перса
+	NumModule         int               `json:"num_module,omitempty"`
 }
