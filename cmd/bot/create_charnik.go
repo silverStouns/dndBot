@@ -45,7 +45,7 @@ var CreateCharHandler = func(update tgbotapi.Update) []tgbotapi.Chattable {
 		//	logger.Error("err:%v", err)
 		//}
 		msgTg := tgbotapi.NewMessage(req.GetChatID(), tmpl)
-		//msgTg.ParseMode = "markdown"
+		msgTg.ParseMode = "MarkdownV2"
 		msgTg.ReplyMarkup = tgbotapi.ReplyKeyboardRemove{RemoveKeyboard: true, Selective: true}
 		req.Step = SetCharInfo
 		return []tgbotapi.Chattable{msgTg}
@@ -70,7 +70,7 @@ var CreateCharHandler = func(update tgbotapi.Update) []tgbotapi.Chattable {
 		}
 
 		msgTg := tgbotapi.NewMessage(req.GetChatID(), txt)
-		//msgTg.ParseMode = "markdown"
+		msgTg.ParseMode = "MarkdownV2"
 		msgTg.ReplyMarkup = tgbotapi.ReplyKeyboardRemove{RemoveKeyboard: true, Selective: true}
 		req.Step = SetCharInfo
 		return []tgbotapi.Chattable{msgTg}
@@ -91,85 +91,39 @@ func getTemplate() string {
 		},
 		"race":       "Раса",
 		"experience": 900,
-	}, "\t", "")
-	return string(byteeee)
-	//"experience":900,
-	//"class":"Класс персонажа/подкласс(если есть)",
-	//"weapon":[{"upgrade":1,"description":"Описание оружия","type":"Тип оружия","damage":"Урон оружия например 1d10","unic_bonuses":"Уникальный бонус оружия, например возможность кровотечения(желательно указать сложность)"},
-	//{"upgrade":2,"description":"Описание оружия2","type":"Тип оружия2","damage":"Урон оружия например 1d10","unic_bonuses":"Уникальный бонус оружия, например возможность кровотечения(желательно указать сложность)"}],
-	//"skills":["Атлетика","Акробатика","Магия"],
-	//"unicue_bonus_skills":{"Акробатика":"10","Атлетика":"10"},
-	//"gold":500,
-	//"invertar":"Опишите что лежит в вашем инвертаре(в это поле вмещается 32к символов)",
-	//"spels":[{"name":"Огненный снаряд","lvl":0,"damage":"1d10","type_spas":"Нет(если есть укажите какой тип)","hard_spas":0}],
-	//"unicue_spels":{"Подсечка":"Сбивает с ног, сложность 14"},
-	//"resurses":"Уникальный рессурс, например: Ярость 2 до отдыха, Возложение рук 20",
-	//"description":"Описание вашего персоонажа",
-	//"image_url":"Если хотим картинку, то кидаем её в личку антону и говорим имя перса",
-	//"num_module":1}`
+		"class":      "Класс персонажа/подкласс(если есть)",
+		"weapon": []map[string]interface{}{
+			{
+				"upgrade":      1,
+				"description":  "Описание оружия",
+				"type":         "Тип оружия",
+				"damage":       "Урон оружия например 1d10",
+				"unic_bonuses": "Уникальный бонус оружия, например возможность кровотечения(желательно указать сложность)",
+			},
+			{
+				"upgrade":      2,
+				"description":  "Описание оружия2",
+				"type":         "Тип оружия2",
+				"damage":       "1d10",
+				"unic_bonuses": "Уникальный бонус оружия, например возможность кровотечения(желательно указать сложность)",
+			},
+		},
+		"skills":   []string{"Атлетика", "Акробатика", "Магия"},
+		"gold":     500,
+		"invertar": "Опишите что лежит в вашем инвертаре(в это поле вмещается 32к символов)",
+		"spels": []map[string]interface{}{
+			{
+				"name": "Огненный снаряд",
+				"lvl":  0, "damage": "1d10",
+				"type_spas": "Нет(если есть укажите какой тип)",
+				"hard_spas": 0,
+			},
+		},
+		"unicue_spels": map[string]interface{}{"Подсечка": "Сбивает с ног, сложность 14", "Удар хвостом": "Стук!"},
+		"resurses":     "Уникальный ресурс, например: Ярость 2 до отдыха, Возложение рук 20",
+		"description":  "Описание вашего персонажа",
+		"image_url":    "Если хотим картинку, то кидаем её в личку антону и говорим имя перса",
+		"num_module":   1,
+	}, "", "\t")
+	return "```\n" + string(byteeee) + "\n```"
 }
-
-//func getTemplate() database.Char {
-//	tmpl := database.Char{
-//		NameUser:   "Имя пользователя(заполнять не требуется)",
-//		NameModule: "Имя модуля(заполнять не требуется)",
-//		NameChar:   "Имя персонажа",
-//		Race:       "Раса",
-//		Characteristic: []database.Characteristic{
-//			{
-//				Name: "Сила",
-//				Col:  10,
-//			},
-//			{
-//				Name: "Ловкость",
-//				Col:  10,
-//			},
-//			{
-//				Name: "Телосложение",
-//				Col:  10,
-//			},
-//			{
-//				Name: "Мудрость",
-//				Col:  10,
-//			},
-//			{
-//				Name: "Интеллект",
-//				Col:  10,
-//			},
-//			{
-//				Name: "Харизма",
-//				Col:  10,
-//			},
-//		},
-//		Experience: 900,
-//		Class:      "Класс персонажа/подкласс(если есть)",
-//		Weapon: []database.WeaponT{
-//			{
-//				Upgrade:     1,
-//				Description: "Описание оружия",
-//				Type:        "Тип оружия",
-//				Damage:      "Урон оружия например 1d10",
-//				UnicBonuses: "Уникальный бонус оружия, например возможность кровотечения(желательно указать сложность)",
-//			},
-//		},
-//		Skills:            []string{"Атлетика", "Акробатика", "Магия"},
-//		UnicueBonusSkills: map[string]string{"Акробатика": "10"},
-//		Gold:              500,
-//		Invertar:          "Опишите что лежит в вашем инвертаре(в это поле вмещается 32к символов)",
-//		Spels: []database.Spels{
-//			{
-//				Name:     "Огненный снаряд",
-//				Lvl:      0,
-//				Damage:   "1d10",
-//				TypeSpas: "Нет(если есть укажите какой тип)",
-//				HardSpas: 0,
-//			},
-//		},
-//		UnicueSpels: map[string]string{"Подсечка": "Сбивает с ног, сложность 14"},
-//		Resurses:    "Уникальный рессурс, например: Ярость 2 до отдыха, Возложение рук 20",
-//		Description: "Описание вашего персоонажа",
-//		ImageUrl:    "Если хотим картинку, то кидаем её в личку антону и говорим имя перса",
-//		NumModule:   1,
-//	}
-//	return tmpl
-//}
